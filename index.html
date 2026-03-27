@@ -201,6 +201,22 @@ body {
     #startBtn { font-size: 18px; padding: 12px 25px; }
     .cake { font-size: clamp(30px,15vw,50px); }
 }
+#surpriseBtn {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 40px;
+    background: #ff4081;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+#surpriseBtn:hover {
+    transform: scale(1.1);
+    background: #ff1c6b;
+}
 </style>
 </head>
 
@@ -218,6 +234,7 @@ body {
     <!-- Main Content -->
     <div id="mainContent">
         <div class="cake">🎂</div>
+        <h2 id="countdown" style="margin-top:10px;"></h2>
         <h1>Happy Birthday Amna 💖</h1><br>
         <p style="font-size: clamp(16px,2.5vw,24px);
         max-width: 90%;
@@ -234,6 +251,23 @@ body {
             <img src="img/White & Black Simple Happy Birthday Card.jpg" onclick="openImage(this.src)">
             
         </div> 
+        <button id="surpriseBtn" onclick="showSurprise()">Click for a Surprise 🎁</button>
+
+<div id="surpriseContent" style="display:none; margin-top:20px;">
+    <h2>💖 Surprise for You Amna 💖</h2>
+    <p style="font-size:20px;">You are the best sister in the world 🌸✨</p>
+    
+    <!-- Image -->
+    <img src="img/amna hidefaec.jpeg" style="width:250px; border-radius:15px; margin-top:10px;">
+    
+    <!-- Optional Video -->
+    <!--
+    <video width="300" controls style="margin-top:10px; border-radius:10px;">
+        <source src="img/vid.mp4" type="video/mp4">
+    </video>
+    -->
+</div>
+       
     
         <!-- Video (Optional) -->
         <!--
@@ -288,6 +322,48 @@ body {
     function closeImage(){
         document.getElementById("imagePopup").style.display = "none";
     }
+    // Countdown Timer
+const birthdayDate = new Date("MArch 28, 2026 00:00:00").getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const gap = birthdayDate - now;
+
+    const days = Math.floor(gap / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((gap % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+        `🎉 ${days}d ${hours}h ${minutes}m ${seconds}s left`;
+
+    if (gap < 0) {
+        document.getElementById("countdown").innerHTML = "🎂 It's Birthday Time!";
+    }
+}
+
+setInterval(updateCountdown, 1000);
+
+function showSurprise() {
+    document.getElementById("surpriseContent").style.display = "block";
+
+    // BIG Confetti Blast 🎉
+    for(let i = 0; i < 200; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = ["red","yellow","blue","pink","white"][Math.floor(Math.random()*5)];
+        confetti.style.animationDuration = (Math.random() * 2 + 1) + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(()=> confetti.remove(),2000);
+    }
+
+    // Button hide after click
+    document.getElementById("surpriseBtn").style.display = "none";
+}
     </script>
     
     </body></html>
