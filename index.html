@@ -18,6 +18,8 @@ body {
     color: white;
     overflow-x: hidden;
     padding: 10px;
+     position: relative;
+    z-index: 1;
 }
 
 /* START SCREEN */
@@ -59,10 +61,13 @@ body {
     padding: 20px;
     min-height: 100vh;
 
+    /* position: relative;
+    z-index: 2; */
+}
+#mainContent, #startScreen {
     position: relative;
     z-index: 2;
 }
-
 .cake {
     font-size: clamp(40px,10vw,70px);
     animation: bounce 2s infinite;
@@ -79,7 +84,7 @@ body {
 }
 
 /* CONFETTI BACKGROUND */
-.confetti {
+/* .confetti {
     position: fixed;
     width: 10px;
     height: 10px;
@@ -89,6 +94,17 @@ body {
 
     z-index: 0;
     pointer-events: none;
+} */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    opacity: 0.8;
+    animation: fall linear infinite;
+
+    z-index: -1;          /* 🔥 sab se important */
+    pointer-events: none; /* clicks block na kare */
 }
 
 /* Gallery (Responsive Grid) */
