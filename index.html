@@ -41,7 +41,18 @@ body {
     padding: 15px;
     min-height: 100vh;
 }
-
+#mainContent {
+    position: relative;
+    z-index: 2; /* 👈 Images & text above confetti */
+}
+.confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    z-index: 0; /* 👈 BACKGROUND */
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
 /* Better gallery responsiveness */
 .gallery {
     display: grid; /* CHANGE */
@@ -74,6 +85,9 @@ body {
 #imagePopup img {
     max-width: 95%;
     max-height: 80%;
+}
+#imagePopup {
+    z-index: 999; /* already high but confirm */
 }
 
 /* MOBILE EXTRA FIX */
