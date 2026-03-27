@@ -5,21 +5,20 @@
 <title>Happy Birthday Amna 🎉</title>
 
 <style>
+/* ---------------- GENERAL ---------------- */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #161718, #0072ff);
     color: white;
     overflow-x: hidden;
-    padding: 10px;
 }
 
-/* START SCREEN */
+/* ---------------- START SCREEN ---------------- */
 #startScreen {
     height: 100vh;
     display: flex;
@@ -27,9 +26,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-
-    position: relative;
-    z-index: 2;
+    padding: 20px;
 }
 
 .title {
@@ -46,10 +43,24 @@ body {
     color: #0072ff;
     cursor: pointer;
     margin-top: 20px;
+    position: relative;
+    overflow: hidden;
     animation: pulse 1.5s infinite;
 }
+#startBtn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent);
+    transition: 0.5s;
+}
+#startBtn:hover::before { left: 100%; }
+#startBtn:hover { transform: scale(1.15); }
 
-/* MAIN CONTENT */
+/* ---------------- MAIN CONTENT ---------------- */
 #mainContent {
     display: none;
     flex-direction: column;
@@ -57,76 +68,92 @@ body {
     text-align: center;
     padding: 20px;
     min-height: 100vh;
-
-    /* position: relative;
-    z-index: 2; */
+    background: linear-gradient(135deg, #141e30, #243b55);
 }
-/* #mainContent, #startScreen {
-    position: relative;
-    z-index: 2;
-} */
+
+/* Cake */
 .cake {
     font-size: clamp(40px,10vw,70px);
     animation: bounce 2s infinite;
 }
 
-/* Typing FIX */
+/* Typing */
 #typing {
     font-size: clamp(16px,2.5vw,24px);
-    max-width: 95%;
+    max-width: 90%;
     margin: 20px auto;
     border-right: 3px solid white;
-    white-space: normal;
+    white-space: nowrap;
     overflow: hidden;
 }
-
-/* CONFETTI BACKGROUND */
- .confetti {
+.confetti {
     position: fixed;
     width: 10px;
     height: 10px;
     border-radius: 3px;
     opacity: 0.8;
-    animation: fall linear infinite;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes fall {
+    0% {
+      transform: translateY(-10px);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+/* Gallery */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+}
+.gallery img {
+    width: clamp(120px,20vw,250px);
+    height: auto;
+    border-radius: 15px;
+    margin: 10px;
+    object-fit: cover;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.gallery img:hover { transform: scale(1.1); }
 
-    z-index: 0;
-    pointer-events: none;
-} 
+/* Video */
+/* #bdayVideo {
+    width: 50%;
+    max-width: 500px;
+    aspect-ratio: 13/9;
+    border-radius: 15px;
+    margin: 20px auto;
+    display: block;
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
+#bdayVideo:hover { transform: scale(1.05); } */
+
+/* @media (max-width: 600px) {
+    #bdayVideo {
+        max-width: 90%;   /* mobile me almost full width */
+    /* }
+} */ */
+
+/* Confetti */
 /* .confetti {
     position: fixed;
     width: 10px;
     height: 10px;
-    border-radius: 3px;
-    opacity: 0.8;
+    top: -10px;
     animation: fall linear infinite;
+} */
 
-    z-index: -1;          /* 🔥 sab se important */
-    /* pointer-events: none; /* clicks block na kare */
-} */ */
-
-/* Gallery (Responsive Grid) */
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    width: 100%;
-    max-width: 900px;
-}
-
-.gallery img {
-    width: 100%;
-    height: 180px;
-    border-radius: 15px;
-    object-fit: cover;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.gallery img:hover {
-    transform: scale(1.05);
-}
-
-/* Popup */
+/* Image Popup */
 #imagePopup {
     display: none;
     position: fixed;
@@ -145,17 +172,35 @@ body {
     max-width: 90%;
     max-height: 90%;
     border-radius: 15px;
+    animation: zoomIn 0.5s ease;
 }
 
 #closeBtn {
     position: absolute;
     top: 20px;
     right: 30px;
-    font-size: 30px;
+    font-size: clamp(24px,4vw,36px);
+    color: white;
     cursor: pointer;
+    z-index: 1000;
+    transition: 0.3s;
 }
+#closeBtn:hover { color: red; transform: scale(1.2); }
 
-/* Button */
+/* ---------------- ANIMATIONS ---------------- */
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+@keyframes glow { from { text-shadow:0 0 10px #fff;} to { text-shadow:0 0 25px #00c6ff;} }
+@keyframes pulse {0% {transform: scale(1);} 50% {transform: scale(1.1);} 100% {transform: scale(1);} }
+@keyframes bounce {50% {transform: translateY(-20px);} }
+@keyframes zoomIn { from {transform: scale(0.5); opacity:0;} to {transform: scale(1); opacity:1;} }
+@keyframes fall { to {transform: translateY(100vh);} }
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 600px) {
+    #typing { font-size: 16px; border-right: 2px solid white; }
+    #startBtn { font-size: 18px; padding: 12px 25px; }
+    .cake { font-size: clamp(30px,15vw,50px); }
+}
 #surpriseBtn {
     padding: 15px 30px;
     font-size: 18px;
@@ -165,131 +210,160 @@ body {
     color: white;
     cursor: pointer;
     margin-top: 20px;
+    transition: 0.3s;
 }
 
-/* Animations */
-@keyframes float { 50% { transform: translateY(-15px); } }
-@keyframes glow { from { text-shadow:0 0 10px #fff;} to { text-shadow:0 0 25px #00c6ff;} }
-@keyframes pulse {50% {transform: scale(1.1);} }
-@keyframes bounce {50% {transform: translateY(-20px);} }
-@keyframes fall { to { transform: translateY(100vh);} }
-
-/* MOBILE */
-@media (max-width: 600px) {
-
-    h1 {
-        font-size: 22px;
-    }
-
-    #countdown {
-        font-size: 16px;
-    }
-
-    .gallery img {
-        height: 140px;
-    }
-
-    #surpriseBtn {
-        width: 90%;
-    }
+#surpriseBtn:hover {
+    transform: scale(1.1);
+    background: #ff1c6b;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music" src="music.mp3"></audio>
-
-<div id="startScreen">
-    <h1 class="title">🎁 Click to Open Surprise 🎁</h1>
-    <button id="startBtn" onclick="start()">Open</button>
-</div>
-
-<div id="mainContent">
-    <div class="cake">🎂</div>
-    <h2 id="countdown"></h2>
-    <h1>Happy Birthday Amna 💖</h1>
-
-    <p id="typing"></p>
-
-    <div class="gallery">
-        <img src="img/Blue Red Simple Happy Birthday Card (Square).jpg" onclick="openImage(this.src)">
-        <img src="img/front.jpeg" onclick="openImage(this.src)">
-        <img src="img/White & Black Simple Happy Birthday Card.jpg" onclick="openImage(this.src)">
+    <!-- Music -->
+    <audio id="music" src="music.mp3"></audio>
+    
+    <!-- Start Screen -->
+    <div id="startScreen">
+        <h1 class="title">🎁 Click to Open Surprise 🎁</h1>
+        <button id="startBtn" onclick="start()">Open</button>
     </div>
+    
+    <!-- Main Content -->
+    <div id="mainContent">
+        <div class="cake">🎂</div>
+        <h2 id="countdown" style="margin-top:10px;"></h2>
+        <h1>Happy Birthday Amna 💖</h1><br>
+        <p style="font-size: clamp(16px,2.5vw,24px);
+        max-width: 90%;
+        margin: 20px auto;
+        border-right: 3px solid white;
+        white-space: nowrap;
+        overflow: hidden;">“Another year, another adventure”</p>
+        <p id="typing"></p>
+    
+        <!-- Gallery -->
+        <div class="gallery">
+            <img src="img/Blue Red Simple Happy Birthday Card (Square).jpg" onclick="openImage(this.src)">
+            <img src="img/front.jpeg" onclick="openImage(this.src)">
+            <img src="img/White & Black Simple Happy Birthday Card.jpg" onclick="openImage(this.src)">
+            
+        </div> 
+        <button id="surpriseBtn" onclick="showSurprise()">Click for a Surprise 🎁</button>
 
-    <button id="surpriseBtn" onclick="showSurprise()">Click for a Surprise 🎁</button>
-
-    <div id="surpriseContent" style="display:none;">
-        <h2>💖 Surprise for You Amna 💖</h2>
-        <p>You are the best sister in the world 🌸✨</p>
-        <img src="img/amna hidefaec.jpeg" style="width:250px; border-radius:15px;">
+<div id="surpriseContent" style="display:none; margin-top:20px;">
+    <h2>💖 Surprise for You Amna 💖</h2>
+    <p style="font-size:20px;">You are the best sister in the world 🌸✨</p>
+    
+    <!-- Image -->
+    <img src="img/amna hidefaec.jpeg" style="width:250px; border-radius:15px; margin-top:10px;">
+    
+    <!-- Optional Video -->
+    <!--
+    <video width="300" controls style="margin-top:10px; border-radius:10px;">
+        <source src="img/vid.mp4" type="video/mp4">
+    </video>
+    -->
+</div>
+       
+    
+        <!-- Video (Optional) -->
+        <!--
+        <video id="bdayVideo" controls>
+            <source src="img/vid.mp4" type="video/mp4">
+        </video>
+        -->
     </div>
-</div>
+    
+    <!-- Image Popup -->
+    <div id="imagePopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:999; flex-direction:column;">
+        <span id="closeBtn" onclick="closeImage()" style="position:absolute; top:20px; right:30px; font-size:36px; color:white; cursor:pointer;">✖</span>
+        <img id="popupImg" src="" alt="Popup Image" style="max-width:90%; max-height:90%; border-radius:15px;">
+    </div>
+    
+    <script>
+    function start() {
+        document.getElementById("startScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "flex";
+        document.getElementById("music").play();
+        typeText();
+        createConfetti();
+    }
+    
+    const text = "Dear Amna Meri Pyari Sister ❤️ Tum meri life ka sab se important hissa ho. Allah tumhein hamesha khush rakhe. I love you so much 💖";
+    let i = 0;
+    function typeText() {
+        if (i < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeText,50);
+        }
+    }
+    
+    function createConfetti() {
+        for(let i = 0; i < 100; i++) {
+          const confetti = document.createElement('div');
+          confetti.classList.add('confetti');
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.backgroundColor = ['red', 'yellow', 'blue', 'white'][Math.floor(Math.random() * 4)];
+          confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          confetti.style.top = '-10px';
+          document.body.appendChild(confetti);
+        }
+    }
+    
+    function openImage(src){
+        document.getElementById("imagePopup").style.display = "flex";
+        document.getElementById("popupImg").src = src;
+    }
+    
+    function closeImage(){
+        document.getElementById("imagePopup").style.display = "none";
+    }
+    // Countdown Timer
+const birthdayDate = new Date("MArch 28, 2026 00:00:00").getTime();
 
-<div id="imagePopup">
-    <span id="closeBtn" onclick="closeImage()">✖</span>
-    <img id="popupImg">
-</div>
+function updateCountdown() {
+    const now = new Date().getTime();
+    const gap = birthdayDate - now;
 
-<script>
-function start() {
-    startScreen.style.display = "none";
-    mainContent.style.display = "flex";
-    music.play();
-    typeText();
-    createConfetti();
-}
+    const days = Math.floor(gap / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((gap % (1000 * 60)) / 1000);
 
-const text = "Dear Amna Meri Pyari Sister ❤️ Tum meri life ka sab se important hissa ho. Allah tumhein hamesha khush rakhe 💖";
-let i = 0;
+    document.getElementById("countdown").innerHTML =
+        `🎉 ${days}d ${hours}h ${minutes}m ${seconds}s left`;
 
-function typeText() {
-    if (i < text.length) {
-        typing.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeText,50);
+    if (gap < 0) {
+        document.getElementById("countdown").innerHTML = "🎂 It's Birthday Time!";
     }
 }
 
-function createConfetti() {
-    for(let i = 0; i < 100; i++) {
-        const c = document.createElement('div');
-        c.className = 'confetti';
-        c.style.left = Math.random()*100 + 'vw';
-        c.style.background = ['red','yellow','blue','white'][Math.floor(Math.random()*4)];
-        c.style.animationDuration = (Math.random()*3+2)+'s';
-        document.body.appendChild(c);
-    }
-}
-
-function openImage(src){
-    imagePopup.style.display = "flex";
-    popupImg.src = src;
-}
-
-function closeImage(){
-    imagePopup.style.display = "none";
-}
-
-const birthdayDate = new Date("March 28, 2026").getTime();
-
-setInterval(()=>{
-    const gap = birthdayDate - Date.now();
-    const d = Math.floor(gap/(1000*60*60*24));
-    const h = Math.floor((gap/(1000*60*60))%24);
-    const m = Math.floor((gap/(1000*60))%60);
-    const s = Math.floor((gap/1000)%60);
-
-    countdown.innerHTML = gap>0 ? `🎉 ${d}d ${h}h ${m}m ${s}s left` : "🎂 It's Birthday Time!";
-},1000);
+setInterval(updateCountdown, 1000);
 
 function showSurprise() {
-    surpriseContent.style.display = "block";
-    surpriseBtn.style.display = "none";
+    document.getElementById("surpriseContent").style.display = "block";
+
+    // BIG Confetti Blast 🎉
+    for(let i = 0; i < 200; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = ["red","yellow","blue","pink","white"][Math.floor(Math.random()*5)];
+        confetti.style.animationDuration = (Math.random() * 2 + 1) + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(()=> confetti.remove(),2000);
+    }
+
+    // Button hide after click
+    document.getElementById("surpriseBtn").style.display = "none";
 }
-</script>
-
-</body>
-</html>
-
+    </script>
+    
+    </body></html>
