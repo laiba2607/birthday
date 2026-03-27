@@ -11,181 +11,104 @@
     margin: 0;
     padding: 0;
 }
+/* ADD THESE CHANGES IN YOUR CSS */
+
+/* Make everything smoother */
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #161718, #0072ff);
     color: white;
     overflow-x: hidden;
+    padding: 10px;
 }
 
-/* ---------------- START SCREEN ---------------- */
-#startScreen {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-}
-
-.title {
-    font-size: clamp(24px, 6vw, 42px);
-    animation: float 3s ease-in-out infinite, glow 2s infinite alternate;
-}
-
-#startBtn {
-    padding: clamp(12px,2vw,20px) clamp(25px,5vw,50px);
-    font-size: clamp(18px,2.5vw,24px);
-    border: none;
-    border-radius: 50px;
-    background: white;
-    color: #0072ff;
-    cursor: pointer;
-    margin-top: 20px;
-    position: relative;
+/* Fix typing overflow issue */
+#typing {
+    font-size: clamp(16px,2.5vw,24px);
+    max-width: 95%;
+    margin: 20px auto;
+    border-right: 3px solid white;
+    white-space: normal; /* FIX */
     overflow: hidden;
-    animation: pulse 1.5s infinite;
 }
-#startBtn::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent);
-    transition: 0.5s;
-}
-#startBtn:hover::before { left: 100%; }
-#startBtn:hover { transform: scale(1.15); }
 
-/* ---------------- MAIN CONTENT ---------------- */
+/* Improve main content spacing */
 #mainContent {
     display: none;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 15px;
     min-height: 100vh;
-    background: linear-gradient(135deg, #141e30, #243b55);
 }
 
-/* Cake */
-.cake {
-    font-size: clamp(40px,10vw,70px);
-    animation: bounce 2s infinite;
-}
-
-/* Typing */
-#typing {
-    font-size: clamp(16px,2.5vw,24px);
-    max-width: 90%;
-    margin: 20px auto;
-    border-right: 3px solid white;
-    white-space: nowrap;
-    overflow: hidden;
-}
-.confetti {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    border-radius: 3px;
-    opacity: 0.8;
-    animation-name: fall;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-  @keyframes fall {
-    0% {
-      transform: translateY(-10px);
-      opacity: 0.8;
-    }
-    100% {
-      transform: translateY(100vh);
-      opacity: 0;
-    }
-  }
-/* Gallery */
+/* Better gallery responsiveness */
 .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 20px 0;
-}
-.gallery img {
-    width: clamp(120px,20vw,250px);
-    height: auto;
-    border-radius: 15px;
-    margin: 10px;
-    object-fit: cover;
-    transition: 0.3s;
-    cursor: pointer;
-}
-.gallery img:hover { transform: scale(1.1); }
-
-/* Video */
-/* #bdayVideo {
-    width: 50%;
-    max-width: 500px;
-    aspect-ratio: 13/9;
-    border-radius: 15px;
-    margin: 20px auto;
-    display: block;
-    object-fit: cover;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    transition: 0.3s;
-}
-#bdayVideo:hover { transform: scale(1.05); } */
-
-/* @media (max-width: 600px) {
-    #bdayVideo {
-        max-width: 90%;   /* mobile me almost full width */
-    /* }
-} */ */
-
-/* Confetti */
-/* .confetti {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    top: -10px;
-    animation: fall linear infinite;
-} */
-
-/* Image Popup */
-#imagePopup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
+    display: grid; /* CHANGE */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
     width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-    flex-direction: column;
+    max-width: 900px;
 }
 
-#imagePopup img {
-    max-width: 90%;
-    max-height: 90%;
+.gallery img {
+    width: 100%;
+    height: 180px;
     border-radius: 15px;
-    animation: zoomIn 0.5s ease;
+    object-fit: cover;
 }
 
-#closeBtn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: clamp(24px,4vw,36px);
-    color: white;
-    cursor: pointer;
-    z-index: 1000;
-    transition: 0.3s;
+/* Surprise image responsive */
+#surpriseContent img {
+    width: 80%;
+    max-width: 300px;
 }
-#closeBtn:hover { color: red; transform: scale(1.2); }
+
+/* Button responsive */
+#startBtn, #surpriseBtn {
+    width: auto;
+    max-width: 90%;
+}
+
+/* Popup fix */
+#imagePopup img {
+    max-width: 95%;
+    max-height: 80%;
+}
+
+/* MOBILE EXTRA FIX */
+@media (max-width: 600px) {
+
+    .title {
+        font-size: 24px;
+    }
+
+    #startBtn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .cake {
+        font-size: 45px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    #countdown {
+        font-size: 16px;
+    }
+
+    .gallery img {
+        height: 140px;
+    }
+
+    #typing {
+        border-right: 2px solid white;
+    }
+}
+
 
 /* ---------------- ANIMATIONS ---------------- */
 @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
@@ -201,7 +124,7 @@ body {
     #startBtn { font-size: 18px; padding: 12px 25px; }
     .cake { font-size: clamp(30px,15vw,50px); }
 }
-#surpriseBtn {
+/* #surpriseBtn {
     padding: 15px 30px;
     font-size: 18px;
     border: none;
@@ -216,7 +139,7 @@ body {
 #surpriseBtn:hover {
     transform: scale(1.1);
     background: #ff1c6b;
-}
+} */
 </style>
 </head>
 
@@ -296,7 +219,8 @@ body {
     let i = 0;
     function typeText() {
         if (i < text.length) {
-            document.getElementById("typing").innerHTML += text.charAt(i);
+            document.getElementById("typing").innerHTML = text.substring(0, i);
+
             i++;
             setTimeout(typeText,50);
         }
