@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Amna 🎉</title>
+
+<style>
+/* ---------------- GENERAL ---------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #161718, #0072ff);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* ---------------- START SCREEN ---------------- */
+#startScreen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.title {
+    font-size: clamp(24px, 6vw, 42px);
+    animation: float 3s ease-in-out infinite, glow 2s infinite alternate;
+}
+
+#startBtn {
+    padding: clamp(12px,2vw,20px) clamp(25px,5vw,50px);
+    font-size: clamp(18px,2.5vw,24px);
+    border: none;
+    border-radius: 50px;
+    background: white;
+    color: #0072ff;
+    cursor: pointer;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    animation: pulse 1.5s infinite;
+}
+#startBtn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent);
+    transition: 0.5s;
+}
+#startBtn:hover::before { left: 100%; }
+#startBtn:hover { transform: scale(1.15); }
+
+/* ---------------- MAIN CONTENT ---------------- */
+#mainContent {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #141e30, #243b55);
+}
+
+/* Cake */
+.cake {
+    font-size: clamp(40px,10vw,70px);
+    animation: bounce 2s infinite;
+}
+
+/* Typing */
+#typing {
+    font-size: clamp(16px,2.5vw,24px);
+    max-width: 90%;
+    margin: 20px auto;
+    border-right: 3px solid white;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    opacity: 0.8;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes fall {
+    0% {
+      transform: translateY(-10px);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+/* Gallery */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+}
+.gallery img {
+    width: clamp(120px,20vw,250px);
+    height: auto;
+    border-radius: 15px;
+    margin: 10px;
+    object-fit: cover;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.gallery img:hover { transform: scale(1.1); }
+
+/* Video */
+/* #bdayVideo {
+    width: 50%;
+    max-width: 500px;
+    aspect-ratio: 13/9;
+    border-radius: 15px;
+    margin: 20px auto;
+    display: block;
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
+#bdayVideo:hover { transform: scale(1.05); } */
+
+/* @media (max-width: 600px) {
+    #bdayVideo {
+        max-width: 90%;   /* mobile me almost full width */
+    /* }
+} */ */
+
+/* Confetti */
+/* .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall linear infinite;
+} */
+
+/* Image Popup */
+#imagePopup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    flex-direction: column;
+}
+
+#imagePopup img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 15px;
+    animation: zoomIn 0.5s ease;
+}
+
+#closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: clamp(24px,4vw,36px);
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.3s;
+}
+#closeBtn:hover { color: red; transform: scale(1.2); }
+
+/* ---------------- ANIMATIONS ---------------- */
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+@keyframes glow { from { text-shadow:0 0 10px #fff;} to { text-shadow:0 0 25px #00c6ff;} }
+@keyframes pulse {0% {transform: scale(1);} 50% {transform: scale(1.1);} 100% {transform: scale(1);} }
+@keyframes bounce {50% {transform: translateY(-20px);} }
+@keyframes zoomIn { from {transform: scale(0.5); opacity:0;} to {transform: scale(1); opacity:1;} }
+@keyframes fall { to {transform: translateY(100vh);} }
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 600px) {
+    #typing { font-size: 16px; border-right: 2px solid white; }
+    #startBtn { font-size: 18px; padding: 12px 25px; }
+    .cake { font-size: clamp(30px,15vw,50px); }
+}
+</style>
+</head>
+
+<body>
+
+    <!-- Music -->
+    <audio id="music" src="music.mp3"></audio>
+    
+    <!-- Start Screen -->
+    <div id="startScreen">
+        <h1 class="title">🎁 Click to Open Surprise 🎁</h1>
+        <button id="startBtn" onclick="start()">Open</button>
+    </div>
+    
+    <!-- Main Content -->
+    <div id="mainContent">
+        <div class="cake">🎂</div>
+        <h1>Happy Birthday Amna 💖</h1><br>
+        <p style="font-size: clamp(16px,2.5vw,24px);
+        max-width: 90%;
+        margin: 20px auto;
+        border-right: 3px solid white;
+        white-space: nowrap;
+        overflow: hidden;">“Another year, another adventure”</p>
+        <p id="typing"></p>
+    
+        <!-- Gallery -->
+        <div class="gallery">
+            <img src="img/Blue Red Simple Happy Birthday Card (Square).jpg" onclick="openImage(this.src)">
+            <img src="img/front.jpeg" onclick="openImage(this.src)">
+            <img src="img/White & Black Simple Happy Birthday Card.jpg" onclick="openImage(this.src)">
+            
+        </div> 
+    
+        <!-- Video (Optional) -->
+        <!--
+        <video id="bdayVideo" controls>
+            <source src="img/vid.mp4" type="video/mp4">
+        </video>
+        -->
+    </div>
+    
+    <!-- Image Popup -->
+    <div id="imagePopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:999; flex-direction:column;">
+        <span id="closeBtn" onclick="closeImage()" style="position:absolute; top:20px; right:30px; font-size:36px; color:white; cursor:pointer;">✖</span>
+        <img id="popupImg" src="" alt="Popup Image" style="max-width:90%; max-height:90%; border-radius:15px;">
+    </div>
+    
+    <script>
+    function start() {
+        document.getElementById("startScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "flex";
+        document.getElementById("music").play();
+        typeText();
+        createConfetti();
+    }
+    
+    const text = "Dear Amna Meri Pyari Sister ❤️ Tum meri life ka sab se important hissa ho. Allah tumhein hamesha khush rakhe. I love you so much 💖";
+    let i = 0;
+    function typeText() {
+        if (i < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeText,50);
+        }
+    }
+    
+    function createConfetti() {
+        for(let i = 0; i < 100; i++) {
+          const confetti = document.createElement('div');
+          confetti.classList.add('confetti');
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.backgroundColor = ['red', 'yellow', 'blue', 'white'][Math.floor(Math.random() * 4)];
+          confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          confetti.style.top = '-10px';
+          document.body.appendChild(confetti);
+        }
+    }
+    
+    function openImage(src){
+        document.getElementById("imagePopup").style.display = "flex";
+        document.getElementById("popupImg").src = src;
+    }
+    
+    function closeImage(){
+        document.getElementById("imagePopup").style.display = "none";
+    }
+    </script>
+    
+    </body></html>
